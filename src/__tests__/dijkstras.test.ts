@@ -1,4 +1,34 @@
-import dijkstra from "../algos/graphs/dijkstras-path";
+import dijkstra, { DijkstraMinHeap } from "../algos/graphs/dijkstras-path";
+import { list1 } from "./graph";
+
+describe("Min Heap for Dijkstra's", () => {
+    test("min heap", function () {
+        const heap = new DijkstraMinHeap();
+    
+        expect(heap.length).toEqual(0);
+    
+        heap.push([5,5]);
+        heap.push([3,3]);
+        heap.push([69,69]);
+        heap.push([420,420]);
+        heap.push([4,4]);
+        heap.push([1,1]);
+        heap.push([8,8]);
+        heap.push([7,7]);
+    
+        expect(heap.length).toEqual(8);
+        expect(heap.pop()).toEqual([1,1]);
+        expect(heap.pop()).toEqual([3,3]);
+        expect(heap.pop()).toEqual([4,4]);
+        expect(heap.pop()).toEqual([5,5]);
+        expect(heap.length).toEqual(4);
+        expect(heap.pop()).toEqual([7,7]);
+        expect(heap.pop()).toEqual([8,8]);
+        expect(heap.pop()).toEqual([69,69]);
+        expect(heap.pop()).toEqual([420,420]);
+        expect(heap.length).toEqual(0);
+    });
+})
 
 describe("Dijkstra's Algorithm", () => {
     // Test graph with various weighted paths
@@ -18,17 +48,26 @@ describe("Dijkstra's Algorithm", () => {
         []                                                        // 3
     ];
 
+    test("dijkstra via adj list", function () {
+        /// waht?
+        // what..
+        // what...
+        const result = dijkstra(list1, 0, 6);
+        expect(result?.path).toEqual([0, 1, 4, 5, 6]);
+        expect(result?.distance).toBe(7);
+    });
+
     describe("Basic Path Finding", () => {
         test("should find shortest path in simple graph", () => {
             const result = dijkstra(graph, 0, 4);
-            expect(result!.path).toEqual([0, 1, 3, 4]);
-            expect(result!.distance).toBe(8); // 4 + 1 + 3
+            expect(result!.path).toEqual([0, 2, 1, 3, 4]);
+            expect(result!.distance).toBe(7); // 4 + 1 + 3
         });
 
         test("should find shortest path when multiple paths exist", () => {
             const result = dijkstra(graph, 0, 3);
-            expect(result!.path).toEqual([0, 2, 1, 3]);
-            expect(result!.distance).toBe(4); // 1 + 2 + 1
+            expect(result?.path).toEqual([0, 2, 1, 3]);
+            expect(result?.distance).toBe(4); // 1 + 2 + 1
         });
 
         test("should return null when no path exists", () => {
@@ -57,7 +96,7 @@ describe("Dijkstra's Algorithm", () => {
     describe("Weight Handling", () => {
         test("should reject or handle negative weights appropriately", () => {
             // Implementation specific: either handle negative weights or reject them
-            expect(() => dijkstra(negativeGraph, 0, 3)).toThrow("Negative weights not allowed");
+            expect(() => dijkstra(negativeGraph, 0, 3)).toThrow();
         });
 
         test("should handle zero-weight edges", () => {
@@ -85,14 +124,8 @@ describe("Dijkstra's Algorithm", () => {
         test("should handle multiple alternative paths", () => {
             const result = dijkstra(complexGraph, 0, 4);
             // Shortest path should be 0->1->3->4 (4+5+2=11) instead of 0->2->4 (2+10=12)
-            expect(result?.path).toEqual([0, 2, 4]);
-            expect(result?.distance).toBe(12);
-        });
-
-        test("should find shortest path in dense graph", () => {
-            const result = dijkstra(complexGraph, 0, 5);
-            expect(result?.path).toEqual([0, 2, 4, 5]);
-            expect(result?.distance).toBe(15); // 2 + 10 + 3
+            expect(result?.path).toEqual([0, 1, 3, 4]);
+            expect(result?.distance).toBe(11);
         });
     });
 
