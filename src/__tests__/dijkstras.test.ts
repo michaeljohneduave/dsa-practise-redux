@@ -1,5 +1,4 @@
 import dijkstra from "../algos/graphs/dijkstras-path";
-import MinHeap from "../algos/minheap";
 import { list1 } from "./graph";
 
 
