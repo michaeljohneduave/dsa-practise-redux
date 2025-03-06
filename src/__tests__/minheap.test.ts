@@ -1,7 +1,7 @@
 import MinHeap from "../algos/minheap";
 
 describe("Min Heap", () => {
-  test("min heap", function () {
+  test("min heap", () => {
       const heap = new MinHeap();
   
       expect(heap.length).toEqual(0);
