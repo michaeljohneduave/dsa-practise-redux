@@ -12,7 +12,7 @@
     ],
     "rootDir": "src",
     "moduleResolution": "node",
-    "target": "ES5",
+    "target": "esnext",
   },
   "exclude": [
     "jest.config.js"
