@@ -1,6 +1,17 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "linter": {
-    "rules": {}
-  }
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"linter": {
+		"rules": {
+			"correctness": {
+				"noUnusedFunctionParameters": {
+					"level": "warn",
+					"fix": "none"
+				},
+				"noUnusedVariables": {
+					"level": "warn",
+					"fix": "none"
+				}
+			}
+		}
+	}
 }
