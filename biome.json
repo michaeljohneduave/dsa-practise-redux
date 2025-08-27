@@ -2,6 +2,9 @@
 	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
 	"linter": {
 		"rules": {
+			"style": {
+				"noNonNullAssertion": "off"
+			},
 			"correctness": {
 				"noUnusedFunctionParameters": {
 					"level": "warn",
